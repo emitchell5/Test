@@ -1,0 +1,119 @@
+USE [LaganProdApp]
+GO
+
+/****** Object:  StoredProcedure [dbo].[lgnbo_metrolist]    Script Date: 9/30/2015 2:51:47 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE procedure [dbo].[lgnbo_metrolist]
+ @org_id varchar(25)
+as 
+begin
+	--DECLARE @org_id varchar(25)
+	--SET @org_id = '101001363248'
+
+	IF @org_id = (SELECT ms_orgid_key from LGNES_HS_METROLIST_SURVEY_2014 WHERE ms_orgid_key = @org_id)
+	BEGIN
+
+	SELECT    BuildingSiteName, HUDID, MHFAID, DHCDID, marketingplan, scatteredsite AS Scatteredsite, txtStreetNumber, txtStreetName, city1, state1, zip1, distance, Bus, 
+                      Subway, CommuterRail, Ferry, sponsor, managementcomp, Title1, FirstName1, LastName1, txtComplianceOfficerStreetNum, txtComplianceOfficerStreetName, cocity1, 
+                      costate1, cozip1, contactemail, telephone1, FaxNumber1, FirstNameB AS FirstNameProperty, LastNameB AS LastNameProperty, txtpropertymanagerStreetNumber, 
+                      txtpropertymanagerStreetName, pocity1, postate1, pozip1, contactemailB AS ContactEmailProperty, propertymanagertelephoneB AS PropertyManagerTelephone, 
+                      propertymanagerFaxNumberB AS PropertyManagerFax, marketratehousing, FirstName3, LastName3, txtmarketrateStreetNumber, txtmarketrateStreetName, mrcity1, 
+                      mrstate1, mrzip1, MarketRateEmailC AS MarketRateEmail, mrtelephoneC AS MarketRateTelephone, mrFaxNumberC AS MarketRateFax, familytypesageyesno, 
+                      restrictedelderlyyesno, restrictedelderlydisabledyesno, singleroomoccupancyunitsyesno, Section8, Section202, Section22I, Section236, TaxCredits, HOME, 
+                      masshousing, otherq7, subsidyother, pvbunitsyesno, pbvunitsnumber, publishinghouseauthorityname, supportivehousingyesno AS SupportiveHousing, 
+                      supportivehousingnumber, applicantsreferralyesno, homelesshouseholdsyesno, homelesshouseholdsnumber, displacedhouseholdsyesno, 
+                      displacedhouseholdsnumber, cbhhouseholdsyesno, cbhhouseholdsnumber, fcfhouseholdsyesno, fcfhouseholdsnumber, dmhdsshouseholdsyesno, 
+                      dmhdsshouseholdsnumber, disabledhouseholdsyesno, disabledhouseholdsnumber, veteranhouseholdsyesno, veteranhouseholdsnumber, 
+                      rentburdenedhouseholdsyesno, rentburdenedhouseholdsnumber, substandardhouseholdsyesno, substandardhouseholdsnumber, chronicallyhomelesshhyesno, 
+                      chronicallyhomelesshhnum, otherhouseholdsyesno, otherhouseholdsnumber, waitinglist, bedroomsize, subsidy, annually, every2years, wheelchairunits, 
+                      householdwaiting1, sensory, householdwaiting2, sroextremelylow, studioextremelylow, L1BRextremelylow, L2BRextremelylow, L3BRextremelylow, 
+                      L4BRextremelylow, L5BRextremelylow, sroextremelylowwaitlist, studioextremelylowwaitlist, L1BRextremelylowwaitlist, L2BRextremelylowwaitlist, 
+                      L3BRextremelylowwaitlist, L4BRextremelylowwaitlist, L5BRextremelylowwaitlist, sroverylow, studioverylow, L1BRverylow, L2BRverylow, L3BRverylow, 
+                      L4BRverylow, L5BRverylow, sroverylowwaitlist, studioverylowwaitlist, L1BRverylowwaitlist, L2BRverylowwaitlist, L3BRverylowwaitlist, L4BRverylowwaitlist, 
+                      L5BRverylowwaitlist, srolowincome, studiolowincome, L1BRlowincome, L2BRlowincome, L3BRlowincome, L4BRlowincome, L5BRlowincome, srolowwaitlist, 
+                      studiolowwaitlist, L1BRlowwaitlist, L2BRlowwaitlist, L3BRlowwaitlist, L4BRlowwaitlist, L5BRlowwaitlist, sromodincome, studiomodincome, L1BRmodincome, 
+                      L2BRmodincome, L3BRmodincome, L4BRmodincome, L5BRmodincome, sromodwaitlist, studiomodwaitlist, L1BRmodwaitlist, L2BRmodwaitlist, L3BRmodwaitlist, 
+                      L4BRmodwaitlist, L5BRmodwaitlist, sromiddleupperincome, studiomiddleupperincome, L1BRmiddleupperincome, L2BRmiddleupperincome, L3BRmiddleupperincome,
+                       L4BRmiddleupperincome, L5BRmiddleupperincome, sromiddleupperwaitlist, studiomiddleupperwaitlist, L1BRmiddleupperwaitlist, L2BRmiddleupperwaitlist, 
+                      L3BRmiddleupperwaitlist, L4BRmiddleupperwaitlist, L5BRmiddleupperwaitlist, sromarketrate, studiomarketrate, L1BRmarketrate, L2BRmarketrate, L3BRmarketrate, 
+                      L4BRmarketrate, L5BRmarketrate, srototal, studiototal, L1BRtotal, L2BRtotal, L3BRtotal, L4BRtotal, L5BRtotal, haveawebsite, websitename, smokefree, pets, parking, 
+                      yesparking, utilities, securitydeposit, SRO_NonElderly, SRO_Elderly, SRO_FemaleHeadofHH, Studio_NonElderly, Studio_Elderly, Studio_FemaleHeadofHH, 
+                      OneBR_NonElderly, OneBR_Elderly, OneBR_FemaleHeadofHH, TwoBR_NonElderly, TwoBR_Elderly, TwoBR_FemaleHeadofHH, ThreeBR_NonElderly, 
+                      ThreeBR_Elderly, ThreeBR_FemaleHeadofHH, FourBR_NonElderly, FourBR_Elderly, FourBR_FemaleHeadofHH, FiveBR_NonElderly, FiveBR_Elderly, 
+                      FiveBR_FemaleHeadofHH, Total_NonElderly, Total_Elderly, Total_FemaleHeadOfHH, SRO_White, SRO_AfricanAmerican, SRO_Hispanic, SRO_Asian, 
+                      SRO_NativeAmerican, SRO_Other, Studio_White, Studio_AfricanAmerican, Studio_Hispanic, Studio_Asian, Studio_NativeAmerican, Studio_Other, OneBR_White, 
+                      OneBR_AfricanAmerican, OneBR_Hispanic, OneBR_Asian, OneBR_NativeAmerican, OneBR_Other, TwoBR_White, TwoBR_AfricanAmerican, TwoBR_Hispanic, 
+                      TwoBR_Asian, TwoBR_NativeAmerican, TwoBR_Other, ThreeBR_White, ThreeBR_AfricanAmerican, ThreeBR_Hispanic, ThreeBR_Asian, ThreeBR_NativeAmerican, 
+                      ThreeBR_Other, FourBR_White, FourBR_AfricanAmerican, FourBR_Hispanic, FourBR_Asian, FourBR_NativeAmerican, FourBR_Other, FiveBR_White, 
+                      FiveBR_AfricanAmerican, FiveBR_Hispanic, FiveBR_Asian, FiveBR_NativeAmerican, FiveBR_Other, Total_White, Total_AfricanAmerican, Total_Hispanic, Total_Asian, 
+                      Total_NativeAmerican, Total_Other, ms_orgid_key, ms_survey_year
+	FROM         LGNES_HS_METROLIST_SURVEY_2014
+	WHERE ms_orgid_key = @org_id
+	END
+	ELSE 
+	IF @org_id = (SELECT ms_orgid_key from LGNES_HS_METROLIST_SURVEY WHERE ms_orgid_key = @org_id) 
+	BEGIN
+
+	SELECT    BuildingSiteName, HUDID, MHFAID, DHCDID, '' AS marketingplan, site AS ScatteredSite, '' AS txtStreetNumber, '' AS txtStreetName, city1, state1, zip1, distance, Bus, 
+                      Subway, CommuterRail, Ferry, sponsor, managementcomp, '' AS Title1, FirstName1, LastName1, '' AS txtComplianceOfficerStreetNum, 
+                      '' AS txtComplianceOfficerStreetName, '' AS cocity1, '' AS costate1, '' AS cozip1, contactemail, telephone1, FaxNumber1, FirstName2 AS FirstNameProperty, 
+                      LastName2 AS LastNameProperty, '' AS txtpropertymanagerStreetNumber, '' AS txtpropertymanagerStreetName, '' AS pocity1, '' AS postate1, '' AS pozip1, 
+                      contactemail2 AS ContactEmailProperty, telephone2 AS PropertyManagerTelephone, FaxNumber2 AS PropertyManagerFax, '' AS marketratehousing, FirstName3, 
+                      LastName3, '' AS txtmarketrateStreetNumber, '' AS txtmarketrateStreetName, '' AS mrcity1, '' AS mrstate1, '' AS mrzip1, contactemail3 AS MarketRateEmail, 
+                      telephone3 AS MarketRateTelephone, FaxNumber3 AS MarketRateFax, '' AS familytypesageyesno, '' AS restrictedelderlyyesno, '' AS restrictedelderlydisabledyesno, 
+                      '' AS singleroomoccupancyunitsyesno, Section8, Section202, Section22I, Section236, TaxCredits, HOME, '' AS masshousing, otherq7, '' AS subsidyother, 
+                      '' AS pvbunitsyesno, '' AS pbvunitsnumber, '' AS publishinghouseauthorityname, Supportive AS SupportiveHousing, '' AS supportivehousingnumber, 
+                      '' AS applicantsreferralyesno, '' AS homelesshouseholdsyesno, '' AS homelesshouseholdsnumber, '' AS displacedhouseholdsyesno, 
+                      '' AS displacedhouseholdsnumber, '' AS cbhhouseholdsyesno, '' AS cbhhouseholdsnumber, '' AS fcfhouseholdsyesno, '' AS fcfhouseholdsnumber, 
+                      '' AS dmhdsshouseholdsyesno, '' AS dmhdsshouseholdsnumber, '' AS disabledhouseholdsyesno, '' AS disabledhouseholdsnumber, '' AS veteranhouseholdsyesno, 
+                      '' AS veteranhouseholdsnumber, '' AS rentburdenedhouseholdsyesno, '' AS rentburdenedhouseholdsnumber, '' AS substandardhouseholdsyesno, 
+                      '' AS substandardhouseholdsnumber, '' AS chronicallyhomelesshhyesno, '' AS chronicallyhomelesshhnum, '' AS otherhouseholdsyesno, 
+                      '' AS otherhouseholdsnumber, waitinglist, '' AS bedroomsize, subsidy, annually, every2years, wheelchairunits, '' AS householdwaiting1, sensory, 
+                      '' AS householdwaiting2, '0' AS sroextremelylow, '0' AS studioextremelylow, '0' AS L1BRextremelylow, '0' AS L2BRextremelylow, '0' AS L3BRextremelylow, 
+                      '0' AS L4BRextremelylow, '0' AS L5BRextremelylow, '0' AS sroextremelylowwaitlist, '0' AS studioextremelylowwaitlist, '0' AS L1BRextremelylowwaitlist, 
+                      '0' AS L2BRextremelylowwaitlist, '0' AS L3BRextremelylowwaitlist, '0' AS L4BRextremelylowwaitlist, '0' AS L5BRextremelylowwaitlist, '0' AS sroverylow, 
+                      '0' AS studioverylow, '0' AS L1BRverylow, '0' AS L2BRverylow, '0' AS L3BRverylow, '0' AS L4BRverylow, '0' AS L5BRverylow, '0' AS sroverylowwaitlist, 
+                      '0' AS studioverylowwaitlist, '0' AS L1BRverylowwaitlist, '0' AS L2BRverylowwaitlist, '0' AS L3BRverylowwaitlist, '0' AS L4BRverylowwaitlist, 
+                      '0' AS L5BRverylowwaitlist, '0' AS srolowincome, '0' AS studiolowincome, '0' AS L1BRlowincome, '0' AS L2BRlowincome, '0' AS L3BRlowincome, 
+                      '0' AS L4BRlowincome, '0' AS L5BRlowincome, '0' AS srolowwaitlist, '0' AS studiolowwaitlist, '0' AS L1BRlowwaitlist, '0' AS L2BRlowwaitlist, '0' AS L3BRlowwaitlist, 
+                      '0' AS L4BRlowwaitlist, '0' AS L5BRlowwaitlist, '0' AS sromodincome, '0' AS studiomodincome, '0' AS L1BRmodincome, '0' AS L2BRmodincome, 
+                      '0' AS L3BRmodincome, '0' AS L4BRmodincome, '0' AS L5BRmodincome, '0' AS sromodwaitlist, '0' AS studiomodwaitlist, '0' AS L1BRmodwaitlist, 
+                      '0' AS L2BRmodwaitlist, '0' AS L3BRmodwaitlist, '0' AS L4BRmodwaitlist, '0' AS L5BRmodwaitlist, '0' AS sromiddleupperincome, '0' AS studiomiddleupperincome, 
+                      '0' AS L1BRmiddleupperincome, '0' AS L2BRmiddleupperincome, '0' AS L3BRmiddleupperincome, '0' AS L4BRmiddleupperincome, '0' AS L5BRmiddleupperincome, 
+                      '0' AS sromiddleupperwaitlist, '0' AS studiomiddleupperwaitlist, '0' AS L1BRmiddleupperwaitlist, '0' AS L2BRmiddleupperwaitlist, '0' AS L3BRmiddleupperwaitlist, 
+                      '0' AS L4BRmiddleupperwaitlist, '0' AS L5BRmiddleupperwaitlist, '0' AS sromarketrate, '0' AS studiomarketrate, '0' AS L1BRmarketrate, '0' AS L2BRmarketrate, 
+                      '0' AS L3BRmarketrate, '0' AS L4BRmarketrate, '0' AS L5BRmarketrate, '0' AS srototal, '0' AS studiototal, '0' AS L1BRtotal, '0' AS L2BRtotal, '0' AS L3BRtotal, 
+                      '0' AS L4BRtotal, '0' AS L5BRtotal, '' AS haveawebsite, '' AS websitename, '' AS smokefree, '' AS pets, '' AS parking, '' AS yesparking, '' AS utilities, 
+                      '' AS securitydeposit, '0' AS SRO_NonElderly, '0' AS SRO_Elderly, '0' AS SRO_FemaleHeadofHH, '0' AS Studio_NonElderly, '0' AS Studio_Elderly, 
+                      '0' AS Studio_FemaleHeadofHH, '0' AS OneBR_NonElderly, '0' AS OneBR_Elderly, '0' AS OneBR_FemaleHeadofHH, '0' AS TwoBR_NonElderly, '0' AS TwoBR_Elderly, 
+                      '0' AS TwoBR_FemaleHeadofHH, '0' AS ThreeBR_NonElderly, '0' AS ThreeBR_Elderly, '0' AS ThreeBR_FemaleHeadofHH, '0' AS FourBR_NonElderly, 
+                      '0' AS FourBR_Elderly, '0' AS FourBR_FemaleHeadofHH, '0' AS FiveBR_NonElderly, '0' AS FiveBR_Elderly, '0' AS FiveBR_FemaleHeadofHH, '0' AS Total_NonElderly, 
+                      '0' AS Total_Elderly, '0' AS Total_FemaleHeadOfHH, '0' AS SRO_White, '0' AS SRO_AfricanAmerican, '0' AS SRO_Hispanic, '0' AS SRO_Asian, 
+                      '0' AS SRO_NativeAmerican, '0' AS SRO_Other, '0' AS Studio_White, '0' AS Studio_AfricanAmerican, '0' AS Studio_Hispanic, '0' AS Studio_Asian, 
+                      '0' AS Studio_NativeAmerican, '0' AS Studio_Other, '0' AS OneBR_White, '0' AS OneBR_AfricanAmerican, '0' AS OneBR_Hispanic, '0' AS OneBR_Asian, 
+                      '0' AS OneBR_NativeAmerican, '0' AS OneBR_Other, '0' AS TwoBR_White, '0' AS TwoBR_AfricanAmerican, '0' AS TwoBR_Hispanic, '0' AS TwoBR_Asian, 
+                      '0' AS TwoBR_NativeAmerican, '0' AS TwoBR_Other, '0' AS ThreeBR_White, '0' AS ThreeBR_AfricanAmerican, '0' AS ThreeBR_Hispanic, '0' AS ThreeBR_Asian, 
+                      '0' AS ThreeBR_NativeAmerican, '0' AS ThreeBR_Other, '0' AS FourBR_White, '0' AS FourBR_AfricanAmerican, '0' AS FourBR_Hispanic, '0' AS FourBR_Asian, 
+                      '0' AS FourBR_NativeAmerican, '0' AS FourBR_Other, '0' AS FiveBR_White, '0' AS FiveBR_AfricanAmerican, '0' AS FiveBR_Hispanic, '0' AS FiveBR_Asian, 
+                      '0' AS FiveBR_NativeAmerican, '0' AS FiveBR_Other, '0' AS Total_White, '0' AS Total_AfricanAmerican, '0' AS Total_Hispanic, '0' AS Total_Asian, 
+                      '0' AS Total_NativeAmerican, '0' AS Total_Other, ms_orgid_key, ms_survey_year
+	FROM         LGNES_HS_MetroList_Survey
+	WHERE ms_orgid_key = @org_id
+	END
+ELSE SELECT ' '
+
+END
+
+
+
+GO
+
+
